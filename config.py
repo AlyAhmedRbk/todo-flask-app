@@ -1,6 +1,6 @@
 # config.py
-MYSQL_HOST = 'localhost'
-MYSQL_USER = 'root'
-MYSQL_PASSWORD = 'root'
-MYSQL_DB = 'todo_db'
+MYSQL_HOST= "mysql_app"
+MYSQL_USER= "root"
+MYSQL_PASSWORD= "rootpwd"
+MYSQL_DB= "devops"
 MYSQL_CURSORCLASS = 'DictCursor'

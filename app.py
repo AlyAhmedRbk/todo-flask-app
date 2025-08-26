@@ -13,6 +13,21 @@ def get_connection():
         cursorclass=pymysql.cursors.DictCursor
     )
 
+def init_db():
+    """Create tasks table if it doesn't exist"""
+    connection = get_connection()
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS tasks (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                title VARCHAR(255) NOT NULL,
+                is_done BOOLEAN DEFAULT FALSE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+    connection.commit()
+    connection.close()
+
 @app.route('/')
 def index():
     connection = get_connection()
@@ -52,5 +67,7 @@ def delete_task(task_id):
     return redirect('/')
 
 if __name__ == '__main__':
+    print("Initializing database...")
+    init_db()   # ✅ Ensure table exists before running app
     print("Starting Flask app...")
     app.run(debug=True, host='0.0.0.0', port=5000)
