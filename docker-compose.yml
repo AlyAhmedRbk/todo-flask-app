@@ -29,7 +29,7 @@ services:
 
     # Flask-app-backend
   flask_app:
-    image: alyahmed071/flask-app:03
+    image: alyahmed071/flask-todo-app:latest
     container_name: flask_app
     ports:
       - "5000:5000"
