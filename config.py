@@ -1,6 +1,7 @@
 # config.py
-MYSQL_HOST= "mysql_app"
-MYSQL_USER= "root"
-MYSQL_PASSWORD= "rootpwd"
-MYSQL_DB= "devops"
-MYSQL_CURSORCLASS = 'DictCursor'
+import os
+
+MYSQL_HOST = os.getenv("MYSQL_HOST", "localhost")
+MYSQL_USER = os.getenv("MYSQL_USER", "root")
+MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD", "rootpassword")
+MYSQL_DB = os.getenv("MYSQL_DB", "devops")
