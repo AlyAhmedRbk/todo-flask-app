@@ -22,13 +22,25 @@ spec:
         - containerPort: 5000
         env:
         - name: MYSQL_HOST
-          value: mysql-app-service
-        - name: MYSQL_DATABASE
-          value: devops
+          valueFrom:
+            configMapKeyRef:
+              name: flask-config 
+              key: MYSQL_HOST
+        - name: MYSQL_DB
+          valueFrom:
+            configMapKeyRef:
+              name: flask-config 
+              key: MYSQL_DB
         - name: MYSQL_USER
-          value: root
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_USER
         - name: MYSQL_PASSWORD
-          value: rootpassword
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_PASSWORD
 ---
 apiVersion: v1
 kind: Service
@@ -40,6 +52,6 @@ spec:
     app: flask-app
   ports:
     - protocol: TCP
-      port: 5000
+      port: 80
       targetPort: 5000
   type: ClusterIP
